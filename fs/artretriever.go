@@ -14,7 +14,7 @@ func ArtRetriever(s, c, l string, m map[rune][]string) (string, error) {
 	if s == "" {
 		result.WriteString("")
 		return result.String(), nil
-	}
+	} 
 
 	// Check for newline patterns in the input string
 	newline := regexp.MustCompile(`\\n`)
@@ -34,7 +34,6 @@ func ArtRetriever(s, c, l string, m map[rune][]string) (string, error) {
 		return result.String(), nil
 	}
 	lines := strings.Split(str, "\n")
-	// Iterate over each line of the input string
 	for ind := 0; ind < len(lines); ind++ {
 		if lines[ind] == "" {
 			// Add an empty line if the input line is empty

@@ -27,7 +27,6 @@ func TestReadBannerFile(t *testing.T) {
 	if err != nil {
 		t.Errorf("ReadBannerFile returned error: %v", err)
 	}
-	// Check if the content read matches the content written
 	if bannerContent != content {
 		t.Errorf("ReadBannerFile did not read expected content. Got: %s, Expected: %s", bannerContent, content)
 	}
@@ -169,7 +168,6 @@ func TestSetColor(t *testing.T) {
 		expected string
 		hasError bool
 	}{
-		// Test named color
 		{"Red", "red", "\033[38;5;196m", false},
 
 		// Test hexadecimal colors

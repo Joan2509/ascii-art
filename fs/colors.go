@@ -10,11 +10,10 @@ import (
 
 // SetColor function converts color names, hexadecimal codes and RGB values to ANSI escape codes for terminal coloring
 func SetColor(c string) (string, error) {
-	// Regular expressions for matching color formats
 	hex := regexp.MustCompile(`^#([a-f0-9]{3}|[a-f0-9]{6})$`)
 	rgb := regexp.MustCompile(`^rgb\(\s*(\d+),\s*(\d+),\s*(\d+)\)$`)
 
-	// Map of color names to ANSI escape codes
+	
 	colorCodes := map[string]string{
 		"black":     "\033[38;5;16m",
 		"red":       "\033[38;5;196m",
@@ -72,7 +71,6 @@ func SetColor(c string) (string, error) {
 			return fmt.Sprintf("\x1b[38;2;%d;%d;%dm", r, g, b), nil
 
 		} else if rgb.MatchString(c) {
-			// If RGB format, extract RGB values and return ANSI escape code
 			matches := rgb.FindStringSubmatch(c)
 			if len(matches) > 0 {
 				r, _ := strconv.Atoi(matches[1])
@@ -87,7 +85,6 @@ func SetColor(c string) (string, error) {
 			return "", errors.New("invalid color or color code")
 		}
 	}
-	// Return the ANSI code for provided named color
 	return code, nil
 }
 
