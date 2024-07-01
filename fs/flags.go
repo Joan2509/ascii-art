@@ -40,8 +40,12 @@ func ParseOptions() (Options, error) {
 			if options.ColorFlag != "" {
 				options.ColorizeLetters = flag.Arg(0)
 				options.InputText = flag.Arg(1)
+			} else if options.ColorFlag == "" {
+				options.BannerFile = strings.TrimSuffix(banner, ".txt")
+				options.InputText = flag.Arg(0)
+				return options, nil
 			} else {
-				return Options{}, errors.New("usage: go run . [OPTION] [OPTION] [STRING] [BANNER]\n\nex: go run . --color=<color> --output=<fileName.txt> <substring to be colored> \"something\" thinkertoy")
+				return Options{}, errors.New("Usage: go run . [STRING] [BANNER]\n\nex: go run . something standard")
 			}
 		}
 	case 3:
@@ -51,11 +55,11 @@ func ParseOptions() (Options, error) {
 			options.InputText = flag.Arg(1)
 			options.BannerFile = strings.TrimSuffix(strings.ToLower(flag.Arg(2)), ".txt")
 		} else {
-			return Options{}, errors.New("usage: go run . [OPTION] [OPTION] [STRING] [BANNER]\n\nex: go run . --color=<color> --output=<fileName.txt> <substring to be colored> \"something\" thinkertoy")
+			return Options{}, errors.New("Usage: go run . [STRING] [BANNER]\n\nex: go run . something standard")
 		}
 	default:
 		// Invalid number of arguments
-		return Options{}, errors.New("usage: go run . [OPTION] [OPTION] [STRING] [BANNER]\n\nex: go run . --color=<color> --output=<fileName.txt> <substring to be colored> \"something\" thinkertoy")
+		return Options{}, errors.New("Usage: go run . [STRING] [BANNER]\n\nex: go run . something standard")
 	}
 	// Convert color flag and banner file name to lowercase for consistency
 	options.ColorFlag = strings.ToLower(options.ColorFlag)
