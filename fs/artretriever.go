@@ -14,7 +14,7 @@ func ArtRetriever(s, c, l string, m map[rune][]string) (string, error) {
 	if s == "" {
 		result.WriteString("")
 		return result.String(), nil
-	} 
+	}
 
 	// Check for newline patterns in the input string
 	newline := regexp.MustCompile(`\\n`)
@@ -54,7 +54,7 @@ func ArtRetriever(s, c, l string, m map[rune][]string) (string, error) {
 								}
 							} else {
 								// Handle invalid non-printable non-ascii characters in the input
-								return "", fmt.Errorf("error! invalid input: %s", string(char))
+								return "", fmt.Errorf("invalid input: %s", string(char))
 							}
 						}
 						break
