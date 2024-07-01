@@ -13,7 +13,6 @@ func SetColor(c string) (string, error) {
 	hex := regexp.MustCompile(`^#([a-f0-9]{3}|[a-f0-9]{6})$`)
 	rgb := regexp.MustCompile(`^rgb\(\s*(\d+),\s*(\d+),\s*(\d+)\)$`)
 
-	
 	colorCodes := map[string]string{
 		"black":     "\033[38;5;16m",
 		"red":       "\033[38;5;196m",
