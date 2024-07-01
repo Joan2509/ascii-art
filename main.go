@@ -28,7 +28,10 @@ func main() {
 
 	// Get the flag values for color, letters to colorize, input text and banner file name. Handle possible errors.
 	options, err := fs.ParseOptions()
-	check(err)
+	if err != nil {
+		fmt.Println(err.Error())
+		return
+	}
 
 	// Get ANSI format string to colorize ASCII-art in the output file.
 	colorCode, err := fs.SetColor(options.ColorFlag)
@@ -58,8 +61,7 @@ func main() {
 		} else if strings.HasSuffix(options.OutputFlag, ".txt") {
 			outputFile = options.OutputFlag
 		} else {
-			fmt.Println("error: the output file must be a text file (filename.txt), printing to the terminal instead")
-			fmt.Print(asciiArt)
+			fmt.Println("error: the output file must be a text file <filename.txt>")
 			return
 		}
 	} else {
@@ -76,6 +78,6 @@ func main() {
 func check(e error) {
 	if e != nil {
 		fmt.Fprintf(os.Stderr, "error: %v\n", e)
-		return
+		os.Exit(1)
 	}
 }
